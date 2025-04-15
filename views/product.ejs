@@ -1,0 +1,28 @@
+<html>
+  <head>
+    <title><%= headTitle %></title>
+    <link rel="stylesheet" href="/css/main.css" />
+  </head>
+  <body>
+    <%- include('./partials/navigation', { menuLinks, activeLinkPath }) %>
+    <main>
+      <h1 class="heading"><%= product.name %></h1>
+      <div><%= product.description %></div>
+      <button onclick="deleteProduct('<%= product.name %>')">Delete</button>
+    </main>
+    <script>
+      function deleteProduct(name) {
+        fetch(`/products/${name}`, {
+          method: "DELETE",
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            if (data.success) {
+              window.location.href = "/products";
+            }
+          })
+          .catch((error) => console.error("Error:", error));
+      }
+    </script>
+  </body>
+</html>

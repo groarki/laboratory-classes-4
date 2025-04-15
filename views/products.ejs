@@ -4,15 +4,17 @@
     <link rel="stylesheet" href="/css/main.css" />
   </head>
   <body>
+    <%- include('partials/navigation', { menuLinks: menuLinks, activeLinkPath:
+    activeLinkPath }); %>
     <main>
-      <%- include('partials/navigation', { menuLinks: menuLinks, activeLinkPath:
-      activeLinkPath }); %>
       <h1 class="heading">Products</h1>
-      <% if (products?.length > 0) { %>
+      <% if (products && products.length > 0) { %>
       <ul>
         <% products.forEach(product => { %>
         <li>
           Name: <%= product.name %>, Description: <%= product.description %>
+          <a href="/products/<%= product.name %>">Details</a>
+          <button onclick="deleteProduct('<%= product.name %>')">Delete</button>
         </li>
         <% }); %>
       </ul>
@@ -21,23 +23,23 @@
       <div>No products available.</div>
       <% }%>
     </main>
-  </body>
-  <script>
-    function deleteProduct(name) {
-      if (!confirm(`Are you sure you want to remove ${name}?`)) {
-        return;
-      }
-
-      fetch(`/products/${name}`, {
-        method: "DELETE",
-      }).then((response) => {
-        console.log(response);
-        if (response.ok) {
-          window.location.reload();
-        } else {
-          alert("Error while removing product.");
+    <script>
+      function deleteProduct(name) {
+        if (!confirm(`Are you sure you want to remove ${name}?`)) {
+          return;
         }
-      });
-    }
-  </script>
+
+        fetch(`/products/${name}`, {
+          method: "DELETE",
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            if (data.success) {
+              window.location.reload();
+            }
+          })
+          .catch((error) => console.error("Error:", error));
+      }
+    </script>
+  </body>
 </html>
