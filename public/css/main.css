@@ -6,15 +6,18 @@ body {
   color: #333;
   line-height: 1.6;
 }
-
+ul {
+  list-style-type: none;
+}
 main {
   padding: 2rem;
   text-align: center;
 }
 
 .heading {
-  color: white;
-  margin: 0;
+  margin: 16px auto;
+  border-radius: 8px;
+  color: #388e3c;
   font-size: 2.2rem;
 }
 
@@ -51,7 +54,20 @@ main {
 .navigation__link--active {
   background-color: #2e7d32;
 }
-
+.del-btn {
+  display: block;
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  margin: 0 auto;
+  margin-top: 8px;
+  background-color: #2e7d32;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  width: 84px;
+  height: 32px;
+  cursor: pointer;
+}
 .form {
   background-color: white;
   padding: 2rem;

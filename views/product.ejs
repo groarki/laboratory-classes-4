@@ -8,7 +8,9 @@
     <main>
       <h1 class="heading"><%= product.name %></h1>
       <div><%= product.description %></div>
-      <button onclick="deleteProduct('<%= product.name %>')">Delete</button>
+      <button class="del-btn" onclick="deleteProduct('<%= product.name %>')">
+        Delete
+      </button>
     </main>
     <script>
       function deleteProduct(name) {

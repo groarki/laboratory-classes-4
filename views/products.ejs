@@ -4,17 +4,25 @@
     <link rel="stylesheet" href="/css/main.css" />
   </head>
   <body>
-    <%- include('partials/navigation', { menuLinks: menuLinks, activeLinkPath:
-    activeLinkPath }); %>
     <main>
+      <%- include('partials/navigation', { menuLinks: menuLinks, activeLinkPath:
+      activeLinkPath }); %>
       <h1 class="heading">Products</h1>
       <% if (products && products.length > 0) { %>
       <ul>
         <% products.forEach(product => { %>
         <li>
-          Name: <%= product.name %>, Description: <%= product.description %>
+          <p>
+            Name: <span style="font-weight: 600"> <%= product.name %></span>
+          </p>
+          <p>Description: <%= product.description %></p>
           <a href="/products/<%= product.name %>">Details</a>
-          <button onclick="deleteProduct('<%= product.name %>')">Delete</button>
+          <button
+            class="del-btn"
+            onclick="deleteProduct('<%= product.name %>')"
+          >
+            Delete
+          </button>
         </li>
         <% }); %>
       </ul>
